@@ -21,8 +21,9 @@ Each project description will be provided as part of this private git repository
 ## Lab & Coursework
 The lab requirements include programming of mini-projects and other assignments; final written examination. All of these will count in your final grade. The final grade will be calculated by averaging the two elements with weights
 
-seven to nine mini-projects: 60%, the  mini-projects must be passed with a grade of at least 6/10.
-final oral exam: 40%.
+* seven to nine mini-projects: 60%, the  mini-projects must be passed with a grade of at least **6/10**.
+* final oral exam: 40%.
+
 Value in ECTS: 6
 
 ## Final oral exam
