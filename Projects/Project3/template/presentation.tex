@@ -1,0 +1,165 @@
+% Juraj Kardos, USI Lugano, juraj.kardos@usi.ch,
+% Dmitry Mikushin, USI Lugano, dmitry.mikushin@usi.ch,
+% using portions of original style file by Tom Cashman
+%
+% IMPORTANT NOTICE:
+%
+% The USI logo is unique; it is authorized for use only by employees of the
+% Università della Svizzera italiana for work-related projects; others can use them
+% ONLY with prior authorization (contact: press@usi.ch).
+%
+% http://www.press.usi.ch/en/corporate-design/corporate-design-stampa.htm
+%
+% This is an example beamer presentation, which uses Università della Svizzera italiana
+% design theme.
+
+\documentclass[aspectratio=43]{beamer}
+\usetheme{usi}
+
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usetikzlibrary{shapes.geometric}
+
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+%sets color of hyperlinks (short title in the footer)
+\hypersetup{colorlinks=true, allcolors=black}
+
+%use rounded blocks with shadows
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\newcommand\score[2]{
+\pgfmathsetmacro\pgfxa{#1+1}
+\tikzstyle{scorestars}=[star, star points=5, star point ratio=2.25, draw,inner sep=1.3pt,anchor=inner point 3]
+  \begin{tikzpicture}[baseline]
+    \foreach \i in {1,...,#2} {
+    \pgfmathparse{(\i<=#1?"usi@yellow":"gray")}
+    \edef\starcolor{\pgfmathresult}
+    \draw (\i*2.0ex,0) node[name=star\i,scorestars,fill=\starcolor,color=\starcolor]  {};
+   }
+  \end{tikzpicture}
+}
+
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+
+\setlength{\fboxsep}{0.25pt}%
+\setlength{\fboxrule}{0pt}%
+
+\title[Title]{\textbf{Emerging parallel application or algorithm}}
+\author{A. Eftekhari{} \\R. Janalik{} \\J. Kardo\v{s}{} \\O. Schenk{}}
+\institute{Faculty of Informatics}
+\date{\today}
+
+
+\begin{document}
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\footnotesize \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},
+    frame=none,  
+}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%-------------------------------------------------------------------------------
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Introduction into problem}
+
+What is the scientific problem being solved?
+\begin{block}{List of the problems}
+    \begin{itemize}
+        \item Introduction into problem scientific domain
+        \item General problem definition
+        \item Problem importance, motivation, solution outcome
+        \item Problem solving performance objectives
+    \end{itemize}
+\end{block}
+
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Mathematical model}
+If you pick up the parallelization of an important algorithm, describe both the complexity of the sequential and the parallel algorithm.
+
+    \begin{itemize}
+        \item Approximation of problem using scientific model:
+        \item Propositions \& assumptions and their motivation (e.g. effects on computational complexity)
+        \item One or multiple of the following: 
+       \begin{itemize}
+       \item Set of governing equations and boundary conditions with 
+             description of used variables
+       \item Definition of model states and transformation conditions
+       \item Flowchart of model system showing dependent physical/logical processes
+       \end{itemize}
+\end{itemize}
+
+
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Computational model}
+How well did the application achieve its scientific objective? Are simulation results compared to physical results?
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Parallel numerical model implementation}
+What parallel platform has the application or the algorithm targeted? (distributed vs.shared memory, graphical processing units, vector, etc.). What tools were used to build the application or to implement the algorithm? (languages, libraries, etc.)
+    \bigskip 
+    \begin{itemize}
+     \item Target parallel platform/hardware architecture (distributed vs. shared memory,
+           graphical processing units, vector, etc.).
+    \item Languages, tools or libraries used for parallel implementation
+     \end{itemize}
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Simulation \& benchmarking results}
+If the application or the algorithm is run on a major supercomputer, where does that computer rank on the Top 500 list?
+
+\bigskip
+
+Does the application or the algorithm scale to large problems on many processors? If you believe it has not, what bottlenecks may have limited its performance?
+
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Simulation \& benchmarking results}
+How well did the application or the algorithm perform? How does this compare to the platform’s best possible performance?
+\end{frame}
+%-------------------------------------------------------------------------------
+\begin{frame}[fragile]{Conclusions}
+    \begin{itemize}
+\item Summarize the problem description and simulation results
+\item  Characterize the quality of chosen numerical and computational methods wrt simulation results and achieved performance
+\item Propose parallel implementation enhancements to improve simulation performance
+\item Propose method enhancements to improve simulation detail/accuracy
+\item Estimate problem size/accuracy that shall show reasonably good performance on CSCS
+supercomputers
+     \end{itemize}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,247 @@
+% Dmitry Mikushin, USI Lugano, dmitry.mikushin@usi.ch,
+% using portions of original style file by Tom Cashman
+%
+% IMPORTANT NOTICE:
+%
+% The USI logo is unique; it is authorized for use only by employees of the
+% Università della Svizzera italiana for work-related projects; others can use them
+% ONLY with prior authorization (contact: press@usi.ch).
+%
+% http://www.press.usi.ch/en/corporate-design/corporate-design-stampa.htm
+%
+% This style file unofficially mimics the design theme of Università della Svizzera italiana.
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{lmodern}
+
+\setbeamertemplate{sidebar right}{}
+
+%\definecolor{usiyellow}{RGB}{254,231,85}
+\definecolor{usiyellow}{RGB}{255,255,255}
+
+\setbeamertemplate{frametitle}
+{%
+  \begin{tikzpicture}[remember picture,overlay] 
+    \node [xshift=0cm,yshift=0cm] at (1.35cm,-0.25cm)
+    {\includegraphics[height=1.0cm,keepaspectratio]{usi}};                      
+  \end{tikzpicture}%
+  \vskip-8pt\hskip85pt\insertframetitle\strut\par%
+}
+
+\defbeamertemplate{itemize item}{smallsquare}{\raisebox{0.3ex}{\hbox{\vrule width 0.7ex height 0.7ex}}}
+\defbeamertemplate{itemize subitem}{smallsquare}{\small\raisebox{0.3ex}{\hbox{\vrule width 0.7ex height 0.7ex}}}
+\defbeamertemplate{itemize subsubitem}{smallsquare}{\small\raisebox{0.3ex}{\hbox{\vrule width 0.7ex height 0.7ex}}}
+\setbeamertemplate{itemize items}[smallsquare]
+
+\setbeamertemplate{title page}
+{
+	\frametitle{\scriptsize{\textcolor{white}{\textsc{Institute of Computational Science}}}}%
+  \begin{centering}
+    \vskip-8pt\begin{beamercolorbox}[sep=16pt,left]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}\vskip-8pt%
+    \vskip1em\par
+    \vskip-8pt\begin{beamercolorbox}[sep=16pt,left]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}\vskip-8pt
+    \vskip-8pt\begin{beamercolorbox}[sep=16pt,left]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}\vskip-8pt\vskip0.5em
+    \vskip10pt\begin{beamercolorbox}[sep=16pt,left]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip-8pt\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    \vskip-8.1em\vskip-16pt\begin{beamercolorbox}[sep=16pt,right]{author}
+      \scriptsize\em %Acknowledgements (edit style file to change)
+    \end{beamercolorbox}\vskip-16pt
+  \end{centering}
+  \vfill
+%  \begin{tikzpicture}[remember picture,overlay] 
+%    \node [xshift=0cm,yshift=0cm] at (12cm,1cm)
+%    {\includegraphics[width=8cm,keepaspectratio]{figures/transmission}};
+%  \end{tikzpicture}%
+}
+
+\useoutertheme{infolines}
+%\useoutertheme{split}
+\useinnertheme{rectangles}
+\setbeamertemplate{headline}{} % removes the headline that infolines inserts
+
+\usecolortheme{whale}
+%\usecolortheme{orchid}
+
+\setbeamerfont{block title}{size={}}
+
+\definecolor{usi@black}{RGB}{35, 31, 32}
+\definecolor{usi@yellow}{RGB}{255, 255, 255}
+%\definecolor{usi@yellow}{RGB}{254, 231, 85}
+
+\setbeamercolor{author in head/foot}{bg=usi@black,fg=white}
+\setbeamercolor{title in head/foot}{bg=usi@yellow,fg=usi@black}
+\setbeamercolor{date in head/foot}{bg=usi@black,fg=white}
+\setbeamercolor{title}{bg={},fg=usi@black}
+\setbeamercolor{institute}{fg=usi@black}
+\setbeamercolor{frametitle}{bg=white,fg=usi@black}
+\setbeamercolor{author}{fg=usi@black}
+\setbeamercolor{date}{fg=usi@black}
+\setbeamercolor{item}{fg=usi@black}
+\setbeamercolor{normal text}{fg=usi@black}
+\setbeamercolor{math text}{fg=usi@black}
+
+\usepackage{comment}
+\usepackage{tikz}
+\usepackage{listingsutf8}
+\usepackage{xcolor}
+\usepackage{beramono}
+\usepackage{polyglossia}
+
+\defaultfontfeatures{Scale=MatchLowercase, Mapping=tex-text}
+
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shadows}
+
+%set color of beamer blocks
+%\useinnertheme[shadow=true]{rounded}
+\setbeamercolor{block title}{fg=white, bg=black}
+\setbeamercolor{block body}{fg=black, bg=black!01!white}  
+
+%\setmainfont{PT Sans Caption}
+%\setsansfont{PT Sans}
+%\setmonofont{PT Mono}
+
+\lstset{
+    inputencoding=utf8,
+%    backgroundcolor=\color{white},
+    tabsize=4,
+    rulecolor=,
+    upquote=true,
+%    aboveskip={1.5\baselineskip},
+    columns=fixed,
+    showstringspaces=false,
+    extendedchars=true,
+    breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    frame=single,
+    showtabs=false,
+    showspaces=false,
+    showstringspaces=false,
+    basicstyle=\scriptsize\ttfamily,
+    identifierstyle=\ttfamily,
+    keywordstyle=\ttfamily\color[rgb]{0,0,1},
+    commentstyle=\ttfamily\color[rgb]{0.133,0.545,0.133},
+    stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
+}
+
+\makeatletter
+\lstdefinelanguage{llvm}{
+  morecomment = [l]{;},
+  morestring=[b]", 
+  sensitive = true,
+  classoffset=0, keywordstyle=\ttfamily\color{blue},
+  morekeywords={
+    define, declare, global, constant,
+    internal, external, private,
+    linkonce, linkonce_odr, weak, weak_odr, appending,
+    common, extern_weak,
+    thread_local, dllimport, dllexport,
+    hidden, protected, default,
+    except, deplibs,
+    volatile, fastcc, coldcc, cc, ccc,
+    x86_stdcallcc, x86_fastcallcc,
+    ptx_kernel, ptx_device,
+    signext, zeroext, inreg, sret, nounwind, noreturn,
+    nocapture, byval, nest, readnone, readonly, noalias, uwtable,
+    inlinehint, noinline, alwaysinline, optsize, ssp, sspreq,
+    noredzone, noimplicitfloat, naked, alignstack,
+    module, asm, align, tail, to,
+    addrspace, section, alias, sideeffect, c, gc,
+    target, datalayout, triple,
+    blockaddress, attributes, metadata,
+  },
+  classoffset=1, keywordstyle=\ttfamily\color{purple},
+  morekeywords={
+    fadd, sub, fsub, mul, fmul,
+    sdiv, udiv, fdiv, srem, urem, frem,
+    and, or, xor,
+    icmp, fcmp,
+    eq, ne, ugt, uge, ult, ule, sgt, sge, slt, sle,
+    oeq, ogt, oge, olt, ole, one, ord, ueq, ugt, uge,
+    ult, ule, une, uno,
+    nuw, nsw, exact, inbounds,
+    phi, call, select, shl, lshr, ashr, va_arg,
+    trunc, zext, sext,
+    fptrunc, fpext, fptoui, fptosi, uitofp, sitofp,
+    ptrtoint, inttoptr, bitcast,
+    ret, br, indirectbr, switch, invoke, unwind, unreachable,
+    malloc, alloca, free, load, store, getelementptr,
+    extractelement, insertelement, shufflevector,
+    extractvalue, insertvalue,
+  },
+  alsoletter={\%.},
+  keywordsprefix={\%},
+}
+\makeatother
+
+\makeatletter
+\newenvironment{btHighlight}[1][]
+{\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
+
+\newcommand\btHL[1][]{%
+  \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
+}
+\def\bt@HL@endenv{%
+  \end{btHighlight}%   
+  \egroup
+}
+\newcommand{\bt@HL@box}[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west, fill=usi@yellow,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
+  }%
+}
+\makeatother
+
+\lstdefinestyle{markable}{
+    moredelim=**[is][\btHL]{`}{`},
+}
+
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.2333333\paperwidth,ht=2.25ex,dp=1ex,center]{date in head/foot}%
+    \hskip.1\paperwidth\usebeamerfont{date in head/foot}\insertshortdate{}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.1\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \textcolor{usi@yellow}{\insertframenumber{}} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+
+
+\hypersetup{colorlinks,linkcolor=blue,urlcolor=blue}
+
+\mode
+<all>
