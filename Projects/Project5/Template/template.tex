@@ -1,0 +1,149 @@
+\documentclass[unicode,11pt,a4paper,oneside,numbers=endperiod,openany]{scrartcl}
+
+\usepackage{amsmath}
+\input{assignment.sty}
+\begin{document}
+
+
+\setassignment
+\setduedate{11.11.2020 (midnight)}
+
+\serieheader{High-Performance Computing Lab}{2020}{Student: FULL NAME}{Discussed with: FULL NAME}{Solution for Project 5}{}
+\newline
+
+\assignmentpolicy
+
+\section{Task: Install METIS 5.0.2, and the corresponding Matlab mex interface}
+
+
+\section{Task:  Construct adjacency matrices
+from connectivity data [10 points]}
+
+
+Run the Matlab script
+\texttt{src/read\_csv\_graphs.m} and complete
+the
+missing sections of the code. Your goal is to
+\begin{itemize}
+    \item read the .csv files in MATLAB,
+    \item construct the adjacency matrix
+    $\mathbf{W} \in R^{n\times n}$ and
+    the node coordinate list $C \in
+    R^{n\times 2}$, where $n$ is the number of nodes, and 
+    \item visualize the graphs using the
+    function
+    \texttt{src/Visualization/gplotg.m}
+\end{itemize}
+
+
+\section{Task: Implement various graph partitioning algorithms [30 points]}
+
+
+\begin{itemize}
+
+\item Run in Matlab the script \texttt{Bench\_bisection.m} and familiarize yourself with the Matlab codes in the directory \texttt{Part\_Toolbox}. An overview of all functions and scripts is offered in \texttt{Contents.m}. 
+
+\item Implement \textbf{spectral graph bisection} based on the entries of the Fiedler eigenvector. Use the incomplete Matlab file \texttt{bisection\_spectral.m} for your solution.
+
+\item Implement \textbf{inertial graph bisection}. For a graph with 2D coordinates, this inertial bisection constructs a line such that half the nodes are on one side of the line, and half are on the other.
+Use the incomplete Matlab file \texttt{bisection\_inertial.m} for your solution.
+ 
+\item Report the bisection edgecut for all toy meshes that are either generated or loaded in the script \\ "Bench\_bisection.m." Use Table~\ref{table:bisection} to report these results.
+
+\begin{table}[h]
+\caption{Bisection results}
+\centering
+\begin{tabular}{l|r|r|r|r} \hline\hline 
+Mesh             &  Coordinate           & Metis 5.0.2  & Spectral & Inertial  \\ \hline
+mesh1e1          &   18                   &             &          &           \\             
+mesh2e1          &   37                   &             &          &           \\ 
+netz4504\_dual   &                        &             &          &           \\ 
+stufe            &                        &             &          &           \\ 
+\hline \hline
+\end{tabular}
+\label{table:bisection}
+\end{table}
+
+\end{itemize}
+
+
+
+
+\section{Task: Recursively bisecting meshes [20 points]}
+
+The recursive bisecion algorithm is implemented in the file \texttt{rec\_bisection.m} of the toolbox. Utilize this function within the script \texttt{Bench\_rec\_bisection.m} to recursively bisect the finite element meshes loaded within the script in 8 and 16 subgraphs. Use your inertial and spectral partitioning implementations, as well as the coordinate partitioning and the METIS bisection routine. Summarize your results in~\ref{table:Rec_bisection}. Finally, visualize the results for $p= 16$ for the case "crack".
+
+\begin{table}[h]
+\caption{Edge-cut results for recursive bi-partitioning.}
+\centering
+\begin{tabular}{l|r|r|r|r|r} \hline\hline 
+ Case            &  Spectral             &  Metis 5.0.2    & Coordinate & Inertial  \\ \hline
+ mesh3e1         &                       &                 &            &           \\             
+ airfoil1        &                       &                 &            &           \\ 
+ 3elt            &                       &                 &            &           \\ 
+ barth4          &                       &                 &            &           \\ 
+ crack           &                       &                 &            &           \\ \hline \hline
+\end{tabular}
+\label{table:Rec_bisection}
+\end{table}
+
+
+\section{Task: Comparing recursive bisection to direct $k$-way partitioning [10 points]}
+
+Use the incomplete \texttt{Bench\_metis.m} for your implementation. Compare the cut obtained from Metis 5.0.2 after applying recursive bisection and direct multiway partitioning for the graphs in question. Consult the Metis manual, and type \texttt{help metismex} in your MATLAB command line to familiarize yourself with the way the Metis recursive and direct multiway partitioning functionalities should be invoked. Summarize your results in Table~\ref{table:Compare_Metis} for 16 and 32 partitions. Comment on your results. Was this behavior anticipated? Visualize the partitioning results for both graphs for 32 partitions.
+
+\begin{table}[h]
+\caption{Comparing the number of cut edges for recursive bisection and direct multiway partitioning in Metis 5.0.2.}
+\centering
+\begin{tabular}{l|r|r|r|r|r|r|r|r} \hline\hline 
+Partitions       &   Luxemburg           & usroads-48 &  Greece &  Switzerland &  Vietnam  &  Norway &  Russia  \\ \hline
+ 16              &                       &            &         &              &           &         &          \\             
+ 32              &                       &            &         &              &           &         &          \\ \hline \hline
+\end{tabular}              
+\label{table:Compare_Metis}
+\end{table}
+
+
+
+\section{Task: Utilizing graph eigenvectors [30 points]}
+
+
+Provide the following illustrative results. Use the incomplete script \texttt{Bench\_eigen\_plot.m} for your implementation.
+
+\begin{figure}[!t]
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{images/fiedler_airfoil.png}
+		\caption{Partitioning the Airfoil graph based on the values of the Fiedler eigenvector. The two partitions are depicted in black and gray, while the cut edges in red respectively. The z-axis represents the value of the entries of the eigenvector.}
+		 \label{fig:fiedler_airfoil}
+	\end{center}
+\end{figure}
+
+
+\begin{enumerate}
+    \item Plot the entries of the eigenvectors associated with the first ($\lambda_1$) and second ($\lambda_2$)  smallest eigenvalues of the graph Laplacian matrix $\mathbf{L}$ for the graph "airfoil1." Comment on the visual result. Is this behavior expected?
+    \item Plot the entries of the eigenvector associated with the second smallest eigenvalue $\lambda_2$ of the Graph Laplacian matrix $\mathbf{L}$. Project each solution on the coordinate system space of the following graphs: mesh3e1, barth4, 3elt, crack. An example is shown in Figure~\ref{fig:fiedler_airfoil}, for the graph "airfoil1". \newline
+    \textbf{Hint}: You might have to modify the functions \texttt{gplotg.m} and \texttt{gplotpart.m} to get the desired result.
+    \item In this assignment we dealt exclusively with graphs $\mathcal{G}(V,E)$ that have coordinates associated with their nodes. This is, however, most commonly not the case when dealing with graphs, as they are in fact abstract structures, used for describing the relation $E$ over a collection of entities $V$. These entities very often cannot be described in a Euclidean coordinate space. Therefore graph drawing is a tool to visualize relational information between nodes. The optimality of graph drawing is measured in terms of computation speed the ultimate usefulness of the resulting layout~\cite{Koren05}. A successful layout should transmit the clearly the desired message, e.g the subsets of a partitioned graph.
+    We will now see a spectral graph drawing method, which constructs the layout utilizing the eigenvectors of the graph Laplacian matrix $\mathbf{L}$. Draw the graphs mesh3e1, barth4, 3elt, crack, and their \textbf{spectral bi-partitioning} results using the eigenvectors to supply coordinates. Locate vertex $i$ at position:
+    \begin{equation*}
+        x_i = \left( \mathbf{v}_2(i), \mathbf{v}_3(i) 
+        \right),
+    \end{equation*}
+    where $\mathbf{v}_2, \mathbf{v}_3$ are the eigenvectors associated with the 2nd and 3rd smallest eigenvalues of $\mathbf{L}$. Figure~\ref{fig:spectral_layout} illustrates these 2 ways of visualizing the partitions of the  "airfoil1" graph.
+\end{enumerate}
+
+
+\begin{figure}[!h]
+\begin{center}
+  \includegraphics[width=0.35\textwidth]{images/airfoil_part_spat.png}
+  \includegraphics[width=0.35\textwidth]{images/airfoil_part_spec.png}
+  \caption{Visualizing the bipartitioning of the graph "airfoil1" with 4253 nodes and 12289 edges. Left: Spatial coordinates. Right: Spectral coordinates.}
+  \label{fig:spectral_layout}
+\end{center}
+\end{figure}
+\bibliographystyle{plain}
+\bibliography{template}
+
+
+
+\end{document}
